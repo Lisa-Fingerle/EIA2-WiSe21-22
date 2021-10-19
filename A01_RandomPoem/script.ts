@@ -1,8 +1,8 @@
 namespace randomPoem {
 
-    let subjekt: string[] = ["Der Dozent", "Das Rentier", "Prinzessin Lillifee", "Hulk", "Garfield", "Willi wills wissen"];
-    let praedikat: string[] = ["hinterfragt", "isst", "knutscht", "tötet", "vergrault", "verlässt", "zerreißt"];
-    let objekt: string[] = ["die Matheaufgabe", "den Weihnachtsmann", "das Objekt der Begierde", "den Donut", "die helfende Hand", "den Protagonisten"];
+    let subjects: string[] = ["Der Dozent", "Das Rentier", "Prinzessin Lillifee", "Hulk", "Garfield", "Willi wills wissen"];
+    let predicates: string[] = ["hinterfragt", "isst", "knutscht", "tötet", "vergrault", "verlässt", "zerreißt"];
+    let objects: string[] = ["die Matheaufgabe", "den Weihnachtsmann", "das Objekt der Begierde", "den Donut", "die helfende Hand", "den Protagonisten"];
 
 
     /**console.log(subjekt);
@@ -10,28 +10,29 @@ namespace randomPoem {
     console.log(objekt);*/
 
 
-    for (let index: number = 6; index > 0; index--) {
+    for (let index: number = subjects.length; index > 0; index--) {
 
-        let wert: string = getVerse(subjekt, praedikat, objekt);
-        console.log(wert);
-    
+        let value: string = getVerse(subjects, predicates, objects);
+        console.log(value);
+
+    }
+
+
+
+
+
+    function getVerse(_subject: string[], _predicate: string[], _object: string[]): string {
+
+        let verse: string = "";
+
+        let randomSubject: number = Math.floor(Math.random() * _subject.length);
+        let randomPredicate: number = Math.floor(Math.random() * _predicate.length);
+        let randomObject: number = Math.floor(Math.random() * _object.length);
+
+        verse += _subject.splice(randomSubject, 1) + " " + _predicate.splice(randomPredicate, 1) + " " + _object.splice(randomObject, 1);
+
+        return (verse);
     }
 
 
 }
-
-
-function getVerse(_subjekt: string[], _praedikat: string[], _objekt: string[]): string {
-
-    let vers: string = "";
-
-    let randomSubjekt: number = Math.floor(Math.random() * _subjekt.length);
-    let randomPraedikat: number = Math.floor(Math.random() * _praedikat.length);
-    let randomObjekt: number = Math.floor(Math.random() * _objekt.length);
-
-    vers += _subjekt.splice(randomSubjekt, 1) + " " + _praedikat.splice(randomPraedikat, 1) + " " + _objekt.splice(randomObjekt, 1);
-
-    return (vers);
-}
-
-
