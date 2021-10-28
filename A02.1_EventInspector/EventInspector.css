@@ -1,0 +1,25 @@
+#span {
+    position: fixed;
+    width: 150px;
+    height: 40px;
+    text-align: center;
+    color: rgb(112, 175, 233);
+    border-style: solid;
+    
+}
+
+#div0 {
+    background-color: rgb(125, 236, 125);
+    height: 800px;
+    width: 400px;
+    position:absolute;
+    
+}
+
+#div1 {
+    background-color: blueviolet;
+    height: 800px;
+    width: 400px;
+    position: absolute;
+    margin-left:420px;
+}
