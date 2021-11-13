@@ -1,9 +1,10 @@
+"use strict";
 //Gruppenarbeit mit Debbie, Asya, Christina
 var L02_EventInspector;
 (function (L02_EventInspector) {
     window.addEventListener("load", handleLoad);
-    var xPosition;
-    var yPosition;
+    let xPosition;
+    let yPosition;
     function handleLoad() {
         document.addEventListener("mousemove", setInfoBox);
         document.addEventListener("click", logInfo);
