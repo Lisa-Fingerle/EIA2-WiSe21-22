@@ -23,14 +23,6 @@ var L03_Sequenzmemory_Settings;
         form.classList.add("is-hidden");
         //allCards = <HTMLDivElement>document.getElementById("#cards");
         sequence = input.split("");
-        for (let i = 0; i < input.length; i++) {
-            let random = Math.floor(Math.random() * sequence.length);
-            let card = document.createElement("div");
-            card.classList.add("column");
-            card.id = sequence.splice(random, 1).join();
-            let test = ("<div class='card'>" + card.id + "</div>");
-            card.innerHTML = test;
-        }
         //console.log("Game starts");
         startGame();
         input = formData.get("Text"); //funktioniert nicht ganz

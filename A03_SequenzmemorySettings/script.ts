@@ -1,3 +1,5 @@
+
+
 namespace L03_Sequenzmemory_Settings {
 
    
@@ -33,14 +35,8 @@ namespace L03_Sequenzmemory_Settings {
         form.classList.add("is-hidden");
         //allCards = <HTMLDivElement>document.getElementById("#cards");
         sequence =  input.split("");
-        for (let i: number = 0; i < input.length; i++) {
-            let random: number = Math.floor(Math.random() * sequence.length);
-            let card: HTMLDivElement = document.createElement("div");
-            card.classList.add("column");
-            card.id = sequence.splice(random, 1).join();
-            let test: string = ("<div class='card'>" + card.id + "</div>");
-            card.innerHTML = test;
-        }
+        
+       
         
         //console.log("Game starts");
 
