@@ -1,4 +1,5 @@
 "use strict";
+//leider bin ich aus Zeitgründen noch nicht weitergekommen mit der Implementation, sorry
 var L03_Sequenzmemory_Settings;
 (function (L03_Sequenzmemory_Settings) {
     window.addEventListener("load", handleLoad);
