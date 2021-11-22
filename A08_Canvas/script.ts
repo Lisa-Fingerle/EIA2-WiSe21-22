@@ -1,4 +1,10 @@
-//Zusammengearbeitet mit Debbie, Asya, Christina
+/*
+Aufgabe: <Aufgabe_08.1-Generative Kunst>
+Name: <Lisa Fingerle>
+Matrikel: <268510>
+Datum: <18.11.2021>
+Quellen: <Zusammengearbeitet mit Debbie, Asya, Christina >
+*/
 
 namespace A08_Canvas {
 
