@@ -25,9 +25,9 @@ var GoldenerHerbst;
         drawCloud({ x: 300, y: 90 }, { x: 250, y: 75 });
         drawMountains(posMountains, 75, 150, "grey", "white");
         drawMountains(posMountains, 50, 110, "grey", "lightgrey");
-        drawTrees1({ x: 130, y: 350 }, { x: 100, y: 100 });
-        drawTrees2({ x: 580, y: 400 }, { x: 100, y: 200 });
-        drawTrees3();
+        drawTrees1({ x: 130, y: 350 }, { x: 100, y: 100 }, 250, 300);
+        drawTrees2({ x: 580, y: 400 }, { x: 100, y: 200 }, 250, 250);
+        drawTrees3(250, 300);
     }
     function drawBackground() {
         console.log("Background");
@@ -98,8 +98,15 @@ var GoldenerHerbst;
         crc2.fill();
         crc2.restore();
     }
-    function drawTrees1(_position, _size) {
-        for (let i = 0; i < 5; i++) {
+    function drawTrees1(_position, _size, _min, _max) {
+        let stepMin = 50;
+        let stepMax = 150;
+        let x = 0;
+        let position = crc2.canvas.height * backgroundPosition;
+        do {
+            let y = -_min - Math.random() * (_max - _min);
+            crc2.save();
+            crc2.translate(x, y + (position + 20));
             crc2.beginPath();
             crc2.moveTo(140, 400);
             crc2.lineTo(140, 400);
@@ -110,29 +117,39 @@ var GoldenerHerbst;
             crc2.lineWidth = 1;
             crc2.closePath();
             crc2.fill();
-        }
-        let nParticles = 80;
-        let radiusParticle = 20;
-        let particle = new Path2D();
-        let gradient = crc2.createRadialGradient(0, 0, 0, 0, 0, radiusParticle);
-        particle.arc(0, 0, radiusParticle, 0, 2 * Math.PI);
-        gradient.addColorStop(0, "#446C31");
-        gradient.addColorStop(1, "#C3AE2E");
-        crc2.save();
-        crc2.translate(_position.x, _position.y);
-        crc2.fillStyle = gradient;
-        for (let drawn = 0; drawn < nParticles; drawn++) {
+            let nParticles = 80;
+            let radiusParticle = 20;
+            let particle = new Path2D();
+            let gradient = crc2.createRadialGradient(0, 0, 0, 0, 0, radiusParticle);
+            particle.arc(0, 0, radiusParticle, 0, 2 * Math.PI);
+            gradient.addColorStop(0, "#446C31");
+            gradient.addColorStop(1, "#C3AE2E");
             crc2.save();
-            let x = (Math.random() - 0.5) * _size.x;
-            let y = -(Math.random() * _size.y);
-            crc2.translate(x, y);
-            crc2.fill(particle);
+            crc2.translate(_position.x, _position.y);
+            crc2.fillStyle = gradient;
+            for (let drawn = 0; drawn < nParticles; drawn++) {
+                crc2.save();
+                let x = (Math.random() - 0.5) * _size.x;
+                let y = -(Math.random() * _size.y);
+                crc2.translate(x, y);
+                crc2.fill(particle);
+                crc2.restore();
+            }
+            x += stepMin + Math.random() * (stepMax - stepMin);
             crc2.restore();
-        }
-        crc2.restore();
+        } while (x < crc2.canvas.width);
     }
-    function drawTrees2(_position, _size) {
-        for (let i = 0; i < 5; i++) {
+    function drawTrees2(_position, _size, _min, _max) {
+        console.log("Trees2");
+        let stepMin = 50;
+        let stepMax = 150;
+        let x = 0;
+        let position = crc2.canvas.height * backgroundPosition;
+        do {
+            console.log("Trees2");
+            let y = -_min - Math.random() * (_max - _min);
+            crc2.save();
+            crc2.translate(x, y + (position + 50));
             crc2.beginPath();
             crc2.moveTo(600, 430);
             crc2.lineTo(600, 430);
@@ -143,56 +160,69 @@ var GoldenerHerbst;
             crc2.lineWidth = 1;
             crc2.closePath();
             crc2.fill();
-        }
-        let nParticles = 70;
-        let radiusParticle = 20;
-        let particle = new Path2D();
-        let gradient = crc2.createRadialGradient(0, 0, 0, 0, 0, radiusParticle);
-        particle.arc(0, 0, radiusParticle, 0, 2 * Math.PI);
-        gradient.addColorStop(0, "#446C31");
-        gradient.addColorStop(1, "#447C31");
-        crc2.save();
-        crc2.translate(_position.x, _position.y);
-        crc2.fillStyle = gradient;
-        for (let drawn = 0; drawn < nParticles; drawn++) {
+            let nParticles = 70;
+            let radiusParticle = 20;
+            let particle = new Path2D();
+            let gradient = crc2.createRadialGradient(0, 0, 0, 0, 0, radiusParticle);
+            particle.arc(0, 0, radiusParticle, 0, 2 * Math.PI);
+            gradient.addColorStop(0, "#446C31");
+            gradient.addColorStop(1, "#447C31");
             crc2.save();
-            let x = (Math.random() - 0.5) * _size.x;
-            let y = -(Math.random() * _size.y);
-            crc2.translate(x, y);
-            crc2.fill(particle);
+            crc2.translate(_position.x, _position.y);
+            crc2.fillStyle = gradient;
+            for (let drawn = 0; drawn < nParticles; drawn++) {
+                crc2.save();
+                let x = (Math.random() - 0.5) * _size.x;
+                let y = -(Math.random() * _size.y);
+                crc2.translate(x, y);
+                crc2.fill(particle);
+                crc2.restore();
+            }
+            x += stepMin + Math.random() * (stepMax - stepMin);
             crc2.restore();
-        }
-        crc2.restore();
+        } while (x < crc2.canvas.width);
     }
-    function drawTrees3() {
-        crc2.beginPath();
-        crc2.moveTo(300, 330);
-        crc2.lineTo(300, 330);
-        crc2.lineTo(280, 330);
-        crc2.lineTo(280, 280);
-        crc2.lineTo(300, 280);
-        crc2.fillStyle = "#45311D";
-        crc2.lineWidth = 1;
-        crc2.fill();
-        crc2.closePath();
-        crc2.beginPath();
-        crc2.moveTo(280, 280);
-        crc2.lineTo(280, 280);
-        crc2.lineTo(220, 280);
-        crc2.lineTo(260, 245);
-        crc2.lineTo(230, 245);
-        crc2.lineTo(260, 215);
-        crc2.lineTo(245, 215);
-        crc2.lineTo(290, 175); //Spitze
-        crc2.lineTo(335, 215);
-        crc2.lineTo(320, 215);
-        crc2.lineTo(350, 245);
-        crc2.lineTo(320, 245);
-        crc2.lineTo(370, 280);
-        crc2.lineTo(280, 280);
-        crc2.fillStyle = "#1F320B";
-        crc2.fill();
-        crc2.closePath();
+    function drawTrees3(_min, _max) {
+        let stepMin = 50;
+        let stepMax = 50;
+        let x = 0;
+        let position = crc2.canvas.height * backgroundPosition;
+        do {
+            console.log("Trees3");
+            let y = -_min - Math.random() * (_max - _min);
+            crc2.save();
+            crc2.translate(x, y + (position + 20));
+            crc2.beginPath();
+            crc2.moveTo(300, 330);
+            crc2.lineTo(300, 330);
+            crc2.lineTo(280, 330);
+            crc2.lineTo(280, 280);
+            crc2.lineTo(300, 280);
+            crc2.fillStyle = "#45311D";
+            crc2.lineWidth = 1;
+            crc2.fill();
+            crc2.closePath();
+            crc2.beginPath();
+            crc2.moveTo(280, 280);
+            crc2.lineTo(280, 280);
+            crc2.lineTo(220, 280);
+            crc2.lineTo(260, 245);
+            crc2.lineTo(230, 245);
+            crc2.lineTo(260, 215);
+            crc2.lineTo(245, 215);
+            crc2.lineTo(290, 175); //Spitze
+            crc2.lineTo(335, 215);
+            crc2.lineTo(320, 215);
+            crc2.lineTo(350, 245);
+            crc2.lineTo(320, 245);
+            crc2.lineTo(370, 280);
+            crc2.lineTo(280, 280);
+            crc2.fillStyle = "#1F320B";
+            crc2.fill();
+            crc2.closePath();
+            x += stepMin + Math.random() * (stepMax - stepMin);
+            crc2.restore();
+        } while (x < crc2.canvas.width);
     }
 })(GoldenerHerbst || (GoldenerHerbst = {}));
 //# sourceMappingURL=script.js.map
