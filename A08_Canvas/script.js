@@ -1,5 +1,11 @@
 "use strict";
-//Zusammengearbeitet mit Debbie, Asya, Christina
+/*
+Aufgabe: <Aufgabe_08.1-Generative Kunst>
+Name: <Lisa Fingerle>
+Matrikel: <268510>
+Datum: <18.11.2021>
+Quellen: <Zusammengearbeitet mit Debbie, Asya, Christina >
+*/
 var A08_Canvas;
 (function (A08_Canvas) {
     window.addEventListener("load", handleLoad);

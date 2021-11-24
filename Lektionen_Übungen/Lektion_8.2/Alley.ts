@@ -1,5 +1,5 @@
 namespace L08_Canvas_Alley {
-    interface Vector {
+    interface Vector {  
         x: number;
         y: number;
     }
@@ -31,6 +31,7 @@ namespace L08_Canvas_Alley {
         drawStreet(posStreet, streetWidthBack, streetWidthFront);
         drawMountains(posMountains, 75, 200, "grey", "white");
         drawMountains(posMountains, 50, 150, "grey", "lightgrey");
+        
         drawTrees(8, posTreesStart, posTreesEnd, 0.1, 0.37, 1.4);
         posTreesStart.x = posStreet.x + streetWidthBack / 2 + treesOffsetBack;
         posTreesEnd.x = posTreesEnd.x + streetWidthFront + 2 * treesOffsetFront;
