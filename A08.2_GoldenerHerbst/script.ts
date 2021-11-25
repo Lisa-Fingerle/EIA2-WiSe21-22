@@ -37,19 +37,23 @@ namespace GoldenerHerbst {
         drawCloud({ x: 300, y: 90 }, { x: 250, y: 75 });
         drawMountains(posMountains, 75, 150, "grey", "white");
         drawMountains(posMountains, 50, 110, "grey", "lightgrey");
-
+        
         drawTrees2({ x: 0, y: 375 }, { x: 100, y: 100 }, 250, 300);
-        drawTrees1({ x: 130, y: 350 }, { x: 100, y: 100 }, 250, 300);
-
-
-
-
+        
+        
         for (let index: number = 0; index < 3; index++) {
 
             drawTrees3({ x: Math.random() * 500, y: Math.random() * 20 });
 
         }
-        drawSquirrel({ x: Math.random() * 1000, y: 250 + Math.random() * 100 });
+        drawBush({ x: 130, y: 350 }, { x: 100, y: 100 }, 250, 300);
+        
+        for (let index: number = 0; index < 6; index++) {
+
+            drawSquirrel({ x: Math.random() * 1000, y: Math.random() * 300 });
+
+        }
+        
 
 
     }
@@ -60,8 +64,8 @@ namespace GoldenerHerbst {
 
         let gradient: CanvasGradient = crc2.createLinearGradient(0, 0, 0, crc2.canvas.height);
         gradient.addColorStop(0, "#A7D3FF");
-        gradient.addColorStop(backgroundPosition, "#E7F3FF");
-        gradient.addColorStop(1, "#3CA651");
+        gradient.addColorStop(backgroundPosition, "#DC7726");
+        gradient.addColorStop(1, "#104210");
 
         crc2.fillStyle = gradient;
         crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
@@ -148,67 +152,9 @@ namespace GoldenerHerbst {
         crc2.restore();
     }
 
-    function drawTrees1(_position: Vector, _size: Vector, _min: number, _max: number): void {
-        let stepMin: number = 50;
-        let stepMax: number = 150;
-        let x: number = 0;
-        let position: number = crc2.canvas.height * backgroundPosition;
+    
 
-        do {
-            let y: number = -_min - Math.random() * (_max - _min);
-            crc2.save();
-            crc2.translate(x, y + (position + 20));
-
-
-            crc2.beginPath();
-            crc2.moveTo(140, 400);
-            crc2.lineTo(140, 400);
-            crc2.lineTo(120, 400);
-            crc2.lineTo(120, 340);
-            crc2.lineTo(140, 340);
-            crc2.fillStyle = "#45311D";
-            crc2.lineWidth = 1;
-            crc2.closePath();
-            crc2.fill();
-
-            let nParticles: number = 80;
-            let radiusParticle: number = 20;
-            let particle: Path2D = new Path2D();
-            let gradient: CanvasGradient = crc2.createRadialGradient(0, 0, 0, 0, 0, radiusParticle);
-
-            particle.arc(0, 0, radiusParticle, 0, 2 * Math.PI);
-            gradient.addColorStop(0, "#446C31");
-            gradient.addColorStop(1, "#C3AE2E");
-
-            crc2.save();
-            crc2.translate(_position.x, _position.y);
-            crc2.fillStyle = gradient;
-
-
-            for (let drawn: number = 0; drawn < nParticles; drawn++) {
-                crc2.save();
-                let x: number = (Math.random() - 0.5) * _size.x;
-                let y: number = - (Math.random() * _size.y);
-                crc2.translate(x, y);
-                crc2.fill(particle);
-                crc2.restore();
-            }
-            x += stepMin + Math.random() * (stepMax - stepMin);
-            crc2.restore();
-
-
-        }
-
-        while (x < crc2.canvas.width);
-
-    }
-
-    /*function drawTrees2(_position: Vector, _size: Vector): void {
-        crc2.beginPath();
-        crc2.moveTo(100, 100);
-        crc2.lineTo(200, 200);
-        crc2.stroke();
-    }*/
+    
 
     function drawTrees2(_position2: Vector, _size2: Vector, _min2: number, _max2: number): void {
         let stepMin: number = 50;
@@ -303,35 +249,121 @@ namespace GoldenerHerbst {
         crc2.restore();
     }
 
+    function drawBush(_position: Vector, _size: Vector, _min: number, _max: number): void {
+        let stepMin: number = 50;
+        let stepMax: number = 150;
+        let x: number = 0;
+        let position: number = crc2.canvas.height * backgroundPosition;
+
+        do {
+            let y: number = -_min - Math.random() * (_max - _min);
+            crc2.save();
+            crc2.translate(x, y + (position + 20));
+
+
+            
+            let nParticles: number = 80;
+            let radiusParticle: number = 20;
+            let particle: Path2D = new Path2D();
+            let gradient: CanvasGradient = crc2.createRadialGradient(0, 0, 0, 0, 0, radiusParticle);
+
+            particle.arc(0, 0, radiusParticle, 0, 2 * Math.PI);
+            gradient.addColorStop(0, "#446C31");
+            gradient.addColorStop(1, "#C3AE2E");
+
+            crc2.save();
+            crc2.translate(_position.x, _position.y);
+            crc2.fillStyle = gradient;
+
+
+            for (let drawn: number = 0; drawn < nParticles; drawn++) {
+                crc2.save();
+                let x: number = (Math.random() - 0.5) * _size.x;
+                let y: number = - (Math.random() * _size.y);
+                crc2.translate(x, y);
+                crc2.fill(particle);
+                crc2.restore();
+            }
+            x += stepMin + Math.random() * (stepMax - stepMin);
+            crc2.restore();
+
+
+        }
+
+        while (x < crc2.canvas.width);
+
+    }
+
     function drawSquirrel(_position: Vector): void {
         crc2.resetTransform();
         crc2.save();
         crc2.translate(_position.x, _position.y);
 
-        crc2.save();
-        crc2.rotate(-0.3);
+        crc2.fillStyle = "#79441E";
+
+        //Arm 1
         crc2.beginPath();
-        crc2.moveTo(-5, -5);
-        crc2.lineTo(-10, -15);
-        crc2.lineTo(-20, -20);
-        crc2.lineTo(-16, -25);
-        crc2.lineTo(-24, -30);
-        crc2.lineTo(-20, -35);
-        crc2.lineTo(-28, -40);
-        crc2.lineTo(-24, -45);
-        crc2.lineTo(-20, -50);
-        crc2.lineTo(0, -50);
-        crc2.lineTo(-5, -45);
-        crc2.lineTo(3, -40);
-        crc2.lineTo(0, -35);
-        crc2.lineTo(5, -30);
-        crc2.lineTo(10, -25);
-        crc2.lineTo(5, -20);
+        crc2.ellipse(70, 85, 5, 15, 20, 16, 40);
         crc2.closePath();
         crc2.fill();
-        crc2.stroke();
 
+        
+        
+        //Body
+        crc2.save();
+        crc2.beginPath();
+        crc2.ellipse(100, 90, 20, 30, -10, 20, 40);
+        crc2.closePath();
+        crc2.fill();
+
+        //Arm 2
+        crc2.beginPath();
+        crc2.ellipse(74, 95, 5, 15, 10, 16, 40);
+        crc2.closePath();
+        crc2.fill();
+
+        //Head
+        let r3: number = 15;
+        crc2.beginPath();
+        crc2.arc(80, 60, r3, 0, 2 * Math.PI);
+        crc2.closePath();
+        crc2.fill();
+
+
+        //Ear
+        crc2.beginPath();
+        crc2.moveTo(70, 50);
+        crc2.lineTo(75, 35);
+        crc2.lineTo(80, 50);
+        crc2.closePath();
+        crc2.fill();
+        
+
+        //Ear right
+        crc2.beginPath();
+        crc2.moveTo(80, 50);
+        crc2.lineTo(85, 35);
+        crc2.lineTo(90, 50);
+        crc2.closePath();
+        crc2.fill();
+        
+        //Leg 1
+        crc2.beginPath();
+        crc2.ellipse(85, 115, 5, 15, 20, 16, 40);
+        crc2.closePath();
+        crc2.fill();
+
+        //Leg 2
+        crc2.beginPath();
+        crc2.ellipse(100, 118, 5, 15, 20, 16, 40);
+        crc2.closePath();
+        crc2.fill();
         crc2.restore();
+
+        //Tail
+        crc2.beginPath();
+        crc2.ellipse(125, 95, 15, 30, 10, 10, 40);
+        crc2.fill();
     }
 
 }

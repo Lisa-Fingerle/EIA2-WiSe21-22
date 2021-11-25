@@ -1,4 +1,7 @@
-.body {
-    max-width: 100%;
-    max-height: auto;
+
+@media screen and (max-width: 800px) {
+    body, canvas {
+        width: 80%;
+    }
 }
+
