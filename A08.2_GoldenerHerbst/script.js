@@ -1,13 +1,12 @@
 "use strict";
-//transformation verketten, dann mit Transform rausgehen -> Hierarchische Struktur
-//Eichhörnchen aus einzelnen Teilen zusammensetzen
 /*
 Aufgabe: <Aufgabe_08.2 Goldener Herbst>
 Name: <Lisa Fingerle>
 Matrikel: <268510>
-Datum: <>
+Datum: <26.11.2021>
 Quellen: <Zusammengearbeitet mit Debbie, Asya, Christina >
 */
+//Code ist noch nicht ganz fertig, Blätter fehlen noch und Eichhörnchen müssen neu positioniert werden
 var GoldenerHerbst;
 (function (GoldenerHerbst) {
     window.addEventListener("load", handleLoad);
@@ -25,14 +24,15 @@ var GoldenerHerbst;
         drawCloud({ x: 300, y: 90 }, { x: 250, y: 75 });
         drawMountains(posMountains, 75, 150, "grey", "white");
         drawMountains(posMountains, 50, 110, "grey", "lightgrey");
-        drawTrees2({ x: 0, y: 375 }, { x: 100, y: 100 }, 250, 300);
+        drawGreenTree({ x: 0, y: 375 }, { x: 100, y: 100 }, 250, 300);
         for (let index = 0; index < 3; index++) {
-            drawTrees3({ x: Math.random() * 500, y: Math.random() * 20 });
+            drawEvergreen({ x: Math.random() * 500, y: Math.random() * 20 });
         }
         drawBush({ x: 130, y: 350 }, { x: 100, y: 100 }, 250, 300);
         for (let index = 0; index < 6; index++) {
-            drawSquirrel({ x: Math.random() * 1000, y: Math.random() * 300 });
+            drawSquirrel({ x: Math.random() * 1000, y: Math.random() * 400 });
         }
+        drawLeafs1({ x: 130, y: 350 }, { x: 100, y: 100 }, 250, 300);
     }
     function drawBackground() {
         console.log("Background");
@@ -103,48 +103,7 @@ var GoldenerHerbst;
         crc2.fill();
         crc2.restore();
     }
-    function drawTrees2(_position2, _size2, _min2, _max2) {
-        let stepMin = 50;
-        let stepMax = 100;
-        let x = -10;
-        let position = crc2.canvas.height * backgroundPosition;
-        do {
-            let y = -_min2 - Math.random() * (_max2 - _min2);
-            crc2.save();
-            crc2.translate(x, y + (position + 20));
-            crc2.beginPath();
-            crc2.moveTo(0, 430);
-            crc2.lineTo(0, 430);
-            crc2.lineTo(-20, 430);
-            crc2.lineTo(-20, 380);
-            crc2.lineTo(0, 380);
-            crc2.fillStyle = "#45311D";
-            crc2.lineWidth = 1;
-            crc2.closePath();
-            crc2.fill();
-            let nParticles = 70;
-            let radiusParticle = 20;
-            let particle = new Path2D();
-            let gradient = crc2.createRadialGradient(0, 0, 0, 0, 0, radiusParticle);
-            particle.arc(0, 0, radiusParticle, 0, 2 * Math.PI);
-            gradient.addColorStop(0, "#446C31");
-            gradient.addColorStop(1, "#447C31");
-            crc2.save();
-            crc2.translate(_position2.x, _position2.y);
-            crc2.fillStyle = gradient;
-            for (let drawn = 0; drawn < nParticles; drawn++) {
-                crc2.save();
-                let x = (Math.random() - 0.5) * _size2.x;
-                let y = -(Math.random() * _size2.y);
-                crc2.translate(x, y);
-                crc2.fill(particle);
-                crc2.restore();
-            }
-            x += stepMin + Math.random() * (stepMax - stepMin);
-            crc2.restore();
-        } while (x < crc2.canvas.width);
-    }
-    function drawTrees3(_position) {
+    function drawEvergreen(_position) {
         crc2.resetTransform();
         crc2.save();
         crc2.translate(_position.x, _position.y);
@@ -178,17 +137,60 @@ var GoldenerHerbst;
         crc2.closePath();
         crc2.restore();
     }
-    function drawBush(_position, _size, _min, _max) {
+    function drawGreenTree(_position2, _size2, _min2, _max2) {
         let stepMin = 50;
-        let stepMax = 150;
+        let stepMax = 100;
+        let x = -10;
+        let position = crc2.canvas.height * backgroundPosition;
+        do {
+            let y = -_min2 - Math.random() * (_max2 - _min2);
+            crc2.save();
+            crc2.translate(x, y + (position + 20));
+            //Trunk
+            crc2.beginPath();
+            crc2.moveTo(0, 430);
+            crc2.lineTo(0, 430);
+            crc2.lineTo(-20, 430);
+            crc2.lineTo(-20, 380);
+            crc2.lineTo(0, 380);
+            crc2.fillStyle = "#45311D";
+            crc2.lineWidth = 1;
+            crc2.closePath();
+            crc2.fill();
+            //Leafs
+            let nParticles = 70;
+            let radiusParticle = 20;
+            let particle = new Path2D();
+            let gradient = crc2.createRadialGradient(0, 0, 0, 0, 0, radiusParticle);
+            particle.arc(0, 0, radiusParticle, 0, 2 * Math.PI);
+            gradient.addColorStop(0, "#446C31");
+            gradient.addColorStop(1, "#447C31");
+            crc2.save();
+            crc2.translate(_position2.x, _position2.y);
+            crc2.fillStyle = gradient;
+            for (let drawn = 0; drawn < nParticles; drawn++) {
+                crc2.save();
+                let x = (Math.random() - 0.5) * _size2.x;
+                let y = -(Math.random() * _size2.y);
+                crc2.translate(x, y);
+                crc2.fill(particle);
+                crc2.restore();
+            }
+            x += stepMin + Math.random() * (stepMax - stepMin);
+            crc2.restore();
+        } while (x < crc2.canvas.width);
+    }
+    function drawBush(_position, _size, _min, _max) {
+        let stepMin = 350;
+        let stepMax = 50;
         let x = 0;
         let position = crc2.canvas.height * backgroundPosition;
         do {
             let y = -_min - Math.random() * (_max - _min);
             crc2.save();
-            crc2.translate(x, y + (position + 20));
-            let nParticles = 80;
-            let radiusParticle = 20;
+            crc2.translate(x, y + (position + 50));
+            let nParticles = 100;
+            let radiusParticle = 10;
             let particle = new Path2D();
             let gradient = crc2.createRadialGradient(0, 0, 0, 0, 0, radiusParticle);
             particle.arc(0, 0, radiusParticle, 0, 2 * Math.PI);
@@ -213,7 +215,7 @@ var GoldenerHerbst;
         crc2.resetTransform();
         crc2.save();
         crc2.translate(_position.x, _position.y);
-        crc2.fillStyle = "#79441E";
+        crc2.fillStyle = "#422B1B";
         //Arm 1
         crc2.beginPath();
         crc2.ellipse(70, 85, 5, 15, 20, 16, 40);
@@ -265,6 +267,38 @@ var GoldenerHerbst;
         crc2.beginPath();
         crc2.ellipse(125, 95, 15, 30, 10, 10, 40);
         crc2.fill();
+    }
+    function drawLeafs1(_position, _size, _min, _max) {
+        let stepMin = 350;
+        let stepMax = 50;
+        let x = 0;
+        let position = crc2.canvas.height * backgroundPosition;
+        do {
+            let y = -_min - Math.random() * (_max - _min);
+            crc2.save();
+            crc2.translate(x, y + (position + 50));
+            //stem
+            /*
+            crc2.beginPath();
+            crc2.moveTo(10, 10);
+            crc2.lineTo(12, 12);
+            crc2.lineTo(7, 16);
+            crc2.lineTo(5, 18);
+            crc2.lineTo(10, 10);
+
+            crc2.stroke();
+
+            crc2.closePath();
+            crc2.fill();*/
+            //Leaf
+            crc2.beginPath();
+            crc2.ellipse(-5, 10, 5, 15, 10, 16, 40);
+            crc2.closePath();
+            crc2.fillStyle = "#446C31";
+            crc2.fill();
+            x += stepMin + Math.random() * (stepMax - stepMin);
+            crc2.restore();
+        } while (x < crc2.canvas.width);
     }
 })(GoldenerHerbst || (GoldenerHerbst = {}));
 //# sourceMappingURL=script.js.map
