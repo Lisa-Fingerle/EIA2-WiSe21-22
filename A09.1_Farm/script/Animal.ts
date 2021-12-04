@@ -42,8 +42,5 @@ namespace OldMacDonaldsFarm {
             //console.log("The " + this.type + "" + this.name + " eats" + stock[_foodPosition].name + ".");
         }
     }
-
-
-
-    
+ 
 }

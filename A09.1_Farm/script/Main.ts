@@ -2,7 +2,7 @@
 Aufgabe: <Aufgabe_08.1_OldMacDonaldsFarm >
 Name: <Lisa Fingerle>
 Matrikel: <268510>
-Datum: <>
+Datum: <04.12.2021>
 Quellen: <Zusammengearbeitet mit Debbie, Asya und Christina >
 */
 
