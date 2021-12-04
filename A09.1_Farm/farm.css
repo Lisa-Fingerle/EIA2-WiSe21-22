@@ -1,0 +1,61 @@
+body {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    background-size: cover;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;   
+    background: url(background.png) no-repeat center center fixed;
+}
+
+h1 {
+    font-size: 50px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin-bottom: 0px;
+}
+
+h2 {
+    font-size: 20px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-top: 15px;
+}
+
+button {
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+#container{
+    display: flex;
+    margin-left: 250px;
+}
+
+#stock {
+    border-radius: 10px;
+    background-color: #ffffff;
+    width: 300px;
+    height: 300px;
+    margin: 15px;
+    opacity: 85%;
+    font-size: 18px;
+    
+}
+
+#animal {
+    width: 350px;
+    height: 350px;
+    margin: 15px;
+    font-size: 18px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    opacity: 85%;
+}
+
+#eating {
+    margin-top: 15px;
+}
