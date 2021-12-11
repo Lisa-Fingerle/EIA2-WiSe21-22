@@ -18,7 +18,7 @@ namespace GoldenerHerbst {
 
     window.addEventListener("load", handleLoad);
     let crc2: CanvasRenderingContext2D;
-    let backgroundPosition: number = 0.5;
+    let backgroundPosition: number = 0.6;
 
 
     function handleLoad(): void {
@@ -32,30 +32,23 @@ namespace GoldenerHerbst {
 
 
         drawBackground();
-        drawSun({ x: 870, y: 55 });
-        drawCloud({ x: 300, y: 90 }, { x: 250, y: 75 });
+        
+        drawSquirrels({ x: 1, y: 1 }, 15, 80);
+        drawSun({ x: 870, y: 105 });
+        drawCloud({ x: 300, y: 90 }, { x: 150, y: 35 });
+        drawCloud({ x: 600, y: 30 }, { x: 100, y: 40 });
+        drawCloud({ x: 100, y: 30 }, { x: 200, y: 40 });
+        
         drawMountains(posMountains, 75, 150, "grey", "white");
         drawMountains(posMountains, 50, 110, "grey", "lightgrey");
         
-        drawGreenTree({ x: 0, y: 375 }, { x: 100, y: 100 }, 250, 300);
+        drawEvergreen(-30, -50, .6, .9);
         
+        drawGreenTree({ x: 130, y: 350 }, { x: 100, y: 100 });
         
-        for (let index: number = 0; index < 3; index++) {
-
-            drawEvergreen({ x: Math.random() * 500, y: Math.random() * 20 });
-
-        }
-
-        drawBush({ x: 130, y: 350 }, { x: 100, y: 100 }, 250, 300);
-
-        for (let index: number = 0; index < 6; index++) {
-
-            drawSquirrel({ x: Math.random() * 1000, y: Math.random() * 400 });
-
-        }
+        drawLeafOrange({ x: 1000, y: 350 }, { x: 100, y: 100 }, 1000, 300);
+        drawLeafRed({ x: 1000, y: 350 }, { x: 100, y: 100 }, 1000, 300);
         
-        drawLeafs1({ x: 130, y: 350 }, { x: 100, y: 100 }, 250, 300);
-
     }
 
 
@@ -69,13 +62,14 @@ namespace GoldenerHerbst {
 
         crc2.fillStyle = gradient;
         crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
+        
     }
 
     function drawSun(_position: Vector): void {
         console.log("Sun", _position);
 
-        let r1: number = 30;
-        let r2: number = 100;
+        let r1: number = 10;
+        let r2: number = 80;
         let gradient: CanvasGradient = crc2.createRadialGradient(0, 0, r1, 0, 0, r2);
 
         gradient.addColorStop(0, "HSLA(60, 100%, 90%, 1)");
@@ -95,8 +89,8 @@ namespace GoldenerHerbst {
     function drawCloud(_position: Vector, _size: Vector): void {
         console.log("Cloud", _position, _size);
 
-        let nParticles: number = 45;
-        let radiusParticle: number = 50;
+        let nParticles: number = 30;
+        let radiusParticle: number = 40;
         let particle: Path2D = new Path2D();
         let gradient: CanvasGradient = crc2.createRadialGradient(0, 0, 0, 0, 0, radiusParticle);
 
@@ -152,105 +146,78 @@ namespace GoldenerHerbst {
         crc2.restore();
     }
 
-    function drawEvergreen(_position: Vector): void {
+    function drawEvergreen(_min: number, _max: number, _minSize: number, _maxSize: number): void {
 
-        crc2.resetTransform();
-        crc2.save();
-        crc2.translate(_position.x, _position.y);
-
-
-        crc2.beginPath();
-        crc2.moveTo(300, 330);
-        crc2.lineTo(300, 330);
-        crc2.lineTo(280, 330);
-        crc2.lineTo(280, 280);
-        crc2.lineTo(300, 280);
-        crc2.fillStyle = "#45311D";
-        crc2.lineWidth = 1;
-        crc2.fill();
-        crc2.closePath();
-
-        crc2.beginPath();
-        crc2.moveTo(280, 280);
-        crc2.lineTo(280, 280);
-        crc2.lineTo(220, 280);
-        crc2.lineTo(260, 245);
-        crc2.lineTo(230, 245);
-        crc2.lineTo(260, 215);
-        crc2.lineTo(245, 215);
-        crc2.lineTo(290, 175); //Spitze
-
-        crc2.lineTo(335, 215);
-        crc2.lineTo(320, 215);
-        crc2.lineTo(350, 245);
-        crc2.lineTo(320, 245);
-        crc2.lineTo(370, 280);
-        crc2.lineTo(280, 280);
-        crc2.fillStyle = "#1F320B";
-        crc2.fill();
-        crc2.closePath();
-
-        crc2.restore();
-    }
-
-    
-
-    function drawGreenTree(_position2: Vector, _size2: Vector, _min2: number, _max2: number): void {
-        let stepMin: number = 50;
-        let stepMax: number = 100;
-        let x: number = -10;
-        let position: number = crc2.canvas.height * backgroundPosition;
+        let stepMin: number = 40;
+        let stepMax: number = 70;
+        let x: number = 0;
+        let horizon: number = crc2.canvas.height * backgroundPosition;
 
         do {
-            let y: number = -_min2 - Math.random() * (_max2 - _min2);
+            let y: number = -_min - Math.random() * (_max - _min);
             crc2.save();
-            crc2.translate(x, y + (position + 20));
+            crc2.translate(x, y + (horizon + 20));
 
-            //Trunk
-            crc2.beginPath();
-            crc2.moveTo(0, 430);
-            crc2.lineTo(0, 430);
-            crc2.lineTo(-20, 430);
-            crc2.lineTo(-20, 380);
-            crc2.lineTo(0, 380);
-            crc2.fillStyle = "#45311D";
-            crc2.lineWidth = 1;
-            crc2.closePath();
-            crc2.fill();
+            let yTree1: number = -30;
+            let yTree2: number = -130;
+            let treeColor: string[] = ["#154f31", "#1a5838", "#1e5d3c"];
+            let treeSize: number = _minSize + Math.random() * (_maxSize - _minSize);
 
-            //Leafs
-            let nParticles: number = 70;
-            let radiusParticle: number = 20;
-            let particle: Path2D = new Path2D();
-            let gradient: CanvasGradient = crc2.createRadialGradient(0, 0, 0, 0, 0, radiusParticle);
+            crc2.scale(treeSize, treeSize);
+            crc2.fillStyle = "#2f2011";
+            crc2.fillRect(0, 0, 22, -40);
 
-            particle.arc(0, 0, radiusParticle, 0, 2 * Math.PI);
-            gradient.addColorStop(0, "#446C31");
-            gradient.addColorStop(1, "#447C31");
+            for (let z: number = 0; z < 3; z++) {
+                crc2.beginPath();
+                crc2.moveTo(-50, yTree1);
+                crc2.lineTo(72, yTree1);
+                crc2.lineTo(11, yTree2);
+                crc2.closePath();
+                crc2.fillStyle = treeColor[z];
+                crc2.fill();
 
-            crc2.save();
-            crc2.translate(_position2.x, _position2.y);
-            crc2.fillStyle = gradient;
-
-            for (let drawn: number = 0; drawn < nParticles; drawn++) {
-                crc2.save();
-                let x: number = (Math.random() - 0.5) * _size2.x;
-                let y: number = - (Math.random() * _size2.y);
-                crc2.translate(x, y);
-                crc2.fill(particle);
-                crc2.restore();
-
+                yTree1 += -30;
+                yTree2 += -30;
             }
-
             x += stepMin + Math.random() * (stepMax - stepMin);
+            crc2.restore();
+        } while (x < crc2.canvas.width);
+    }
+
+
+    
+    function drawGreenTree(_position: Vector, _size: Vector): void {
+        
+        //crc2.scale(treeSize, treeSize);
+        crc2.fillStyle = "#2f2011";
+        crc2.fillRect(110, 350, 22, 40);
+
+        let nParticles: number = 70;
+        let radiusParticle: number = 20;
+        let particle: Path2D = new Path2D();
+        let gradient: CanvasGradient = crc2.createRadialGradient(0, 0, 0, 0, 0, radiusParticle);
+
+        particle.arc(0, 0, radiusParticle, 0, 2 * Math.PI);
+        gradient.addColorStop(0, "#446C31");
+        gradient.addColorStop(1, "#447C31");
+
+        crc2.save();
+        crc2.translate(_position.x, _position.y);
+        crc2.fillStyle = gradient;
+
+        for (let drawn: number = 0; drawn < nParticles; drawn++) {
+            crc2.save();
+            let x: number = (Math.random() - 0.5) * _size.x;
+            let y: number = - (Math.random() * _size.y);
+            crc2.translate(x, y);
+            crc2.fill(particle);
             crc2.restore();
 
         }
-        while (x < crc2.canvas.width);
+
     }
 
     
-
     function drawBush(_position: Vector, _size: Vector, _min: number, _max: number): void {
         let stepMin: number = 350;
         let stepMax: number = 50;
@@ -263,7 +230,7 @@ namespace GoldenerHerbst {
             crc2.translate(x, y + (position + 50));
 
 
-            
+
             let nParticles: number = 100;
             let radiusParticle: number = 10;
             let particle: Path2D = new Path2D();
@@ -296,77 +263,97 @@ namespace GoldenerHerbst {
 
     }
 
-    function drawSquirrel(_position: Vector): void {
-        crc2.resetTransform();
-        crc2.save();
-        crc2.translate(_position.x, _position.y);
+    
 
-        crc2.fillStyle = "#422B1B";
+    function drawSquirrels(_position: Vector, _min: number, _max: number): void {
 
-        //Arm 1
-        crc2.beginPath();
-        crc2.ellipse(70, 85, 5, 15, 20, 16, 40);
-        crc2.closePath();
-        crc2.fill();
+        let stepMin: number = 150;
+        let stepMax: number = 500;
+        let x: number = 0;
+        let position: number = crc2.canvas.height * backgroundPosition;
 
-        //Body
-        crc2.save();
-        crc2.beginPath();
-        crc2.ellipse(100, 90, 20, 30, -10, 20, 40);
-        crc2.closePath();
-        crc2.fill();
+        do {
+            let y: number = -_min - Math.random() * (_max - _min);
+            crc2.save();
+            crc2.translate(x, y + (position + 100));
 
-        //Arm 2
-        crc2.beginPath();
-        crc2.ellipse(74, 95, 5, 15, 10, 16, 40);
-        crc2.closePath();
-        crc2.fill();
+            crc2.fillStyle = "#422B1B";
 
-        //Head
-        let r3: number = 15;
-        crc2.beginPath();
-        crc2.arc(80, 60, r3, 0, 2 * Math.PI);
-        crc2.closePath();
-        crc2.fill();
+            //Arm 1
+            crc2.beginPath();
+            crc2.ellipse(70, 85, 5, 15, 20, 16, 40);
+            crc2.closePath();
+            crc2.fill();
 
-        //Ear
-        crc2.beginPath();
-        crc2.moveTo(70, 50);
-        crc2.lineTo(75, 35);
-        crc2.lineTo(80, 50);
-        crc2.closePath();
-        crc2.fill();
-        
-        //Ear right
-        crc2.beginPath();
-        crc2.moveTo(80, 50);
-        crc2.lineTo(85, 35);
-        crc2.lineTo(90, 50);
-        crc2.closePath();
-        crc2.fill();
-        
-        //Leg 1
-        crc2.beginPath();
-        crc2.ellipse(85, 115, 5, 15, 20, 16, 40);
-        crc2.closePath();
-        crc2.fill();
+            //Body
+            crc2.save();
+            crc2.beginPath();
+            crc2.ellipse(100, 90, 20, 30, -10, 20, 40);
+            crc2.closePath();
+            crc2.fill();
 
-        //Leg 2
-        crc2.beginPath();
-        crc2.ellipse(100, 118, 5, 15, 20, 16, 40);
-        crc2.closePath();
-        crc2.fill();
-        crc2.restore();
+            //Arm 2
+            crc2.beginPath();
+            crc2.ellipse(74, 95, 5, 15, 10, 16, 40);
+            crc2.closePath();
+            crc2.fill();
 
-        //Tail
-        crc2.beginPath();
-        crc2.ellipse(125, 95, 15, 30, 10, 10, 40);
-        crc2.fill();
+            //Head
+            let r3: number = 15;
+            crc2.beginPath();
+            crc2.arc(80, 60, r3, 0, 2 * Math.PI);
+            crc2.closePath();
+            crc2.fill();
+
+            //Ear
+            crc2.beginPath();
+            crc2.moveTo(70, 50);
+            crc2.lineTo(75, 35);
+            crc2.lineTo(80, 50);
+            crc2.closePath();
+            crc2.fill();
+
+            //Ear right
+            crc2.beginPath();
+            crc2.moveTo(80, 50);
+            crc2.lineTo(85, 35);
+            crc2.lineTo(90, 50);
+            crc2.closePath();
+            crc2.fill();
+
+            //Leg 1
+            crc2.beginPath();
+            crc2.ellipse(85, 115, 5, 15, 20, 16, 40);
+            crc2.closePath();
+            crc2.fill();
+
+            //Leg 2
+            crc2.beginPath();
+            crc2.ellipse(100, 118, 5, 15, 20, 16, 40);
+            crc2.closePath();
+            crc2.fill();
+            crc2.restore();
+
+            //Tail
+            crc2.beginPath();
+            crc2.ellipse(125, 95, 15, 30, 10, 10, 40);
+            crc2.fill();
+
+            //Eye
+            
+            //Mouth
+
+
+            x += stepMin + Math.random() * (stepMax - stepMin);
+            crc2.restore();
+
+        } while (x < crc2.canvas.width);
+
     }
 
-    function drawLeafs1(_position: Vector, _size: Vector, _min: number, _max: number): void {
-       
-        let stepMin: number = 350;
+    function drawLeafOrange(_position: Vector, _size: Vector, _min: number, _max: number): void {
+
+        let stepMin: number = 20;
         let stepMax: number = 50;
         let x: number = 0;
         let position: number = crc2.canvas.height * backgroundPosition;
@@ -376,38 +363,46 @@ namespace GoldenerHerbst {
             crc2.save();
             crc2.translate(x, y + (position + 50));
 
-            //stem
-            /*
             crc2.beginPath();
-            crc2.moveTo(10, 10);
-            crc2.lineTo(12, 12);
-            crc2.lineTo(7, 16);
-            crc2.lineTo(5, 18);
-            crc2.lineTo(10, 10);
-
-            crc2.stroke();
-
+            crc2.ellipse(-5, 10, 5, 20, 10, 16, 40);
             crc2.closePath();
-            crc2.fill();*/
-        
-            //Leaf
-
-            crc2.beginPath();
-            crc2.ellipse(-5, 10, 5, 15, 10, 16, 40);
-            crc2.closePath();
-            crc2.fillStyle = "#446C31";
+            crc2.fillStyle = "#a43e00";
             crc2.fill();
-        
+
             x += stepMin + Math.random() * (stepMax - stepMin);
             crc2.restore();
-        } 
+
+        }
         while (x < crc2.canvas.width);
 
-        
-
-
     }
-    
+
+    function drawLeafRed(_position: Vector, _size: Vector, _min: number, _max: number): void {
+        let stepMin: number = 20;
+        let stepMax: number = 50;
+        let x: number = 0;
+        let position: number = crc2.canvas.height * backgroundPosition;
+
+        do {
+            let y: number = -_min - Math.random() * (_max - _min);
+            crc2.save();
+            crc2.translate(x, y + (position + 50));
+
+            crc2.beginPath();
+            crc2.ellipse (0, 0, 11, 20, 10, 16, 40);
+            crc2.closePath();
+            crc2.fillStyle = "#d30000";
+            crc2.fill();
+
+            x += stepMin + Math.random() * (stepMax - stepMin);
+            crc2.restore();
+
+            
+
+        }
+        while (x < crc2.canvas.width);
+    }
+
 }
 
 
