@@ -29,43 +29,25 @@ var GoldenerHerbst_Classes;
             if (this.position.y > GoldenerHerbst_Classes.crc2.canvas.height)
                 this.position.y -= GoldenerHerbst_Classes.crc2.canvas.height;
         }
+        drawLeafOrange() {
+            let stepMin = 20;
+            let stepMax = 50;
+            let x = 0;
+            let position = GoldenerHerbst_Classes.crc2.canvas.height * GoldenerHerbst_Classes.backgroundPosition;
+            do {
+                let y = -_min - Math.random() * (_max - _min);
+                GoldenerHerbst_Classes.crc2.save();
+                GoldenerHerbst_Classes.crc2.translate(x, y + (position + 50));
+                GoldenerHerbst_Classes.crc2.beginPath();
+                GoldenerHerbst_Classes.crc2.ellipse(-5, 10, 5, 20, 10, 16, 40);
+                GoldenerHerbst_Classes.crc2.closePath();
+                GoldenerHerbst_Classes.crc2.fillStyle = "#a43e00";
+                GoldenerHerbst_Classes.crc2.fill();
+                x += stepMin + Math.random() * (stepMax - stepMin);
+                GoldenerHerbst_Classes.crc2.restore();
+            } while (x < GoldenerHerbst_Classes.crc2.canvas.width);
+        }
     }
     GoldenerHerbst_Classes.LeafOrange = LeafOrange;
-    function drawLeafOrange() {
-        let stepMin = 20;
-        let stepMax = 50;
-        let x = 0;
-        let position = GoldenerHerbst_Classes.crc2.canvas.height * GoldenerHerbst_Classes.backgroundPosition;
-        do {
-            let y = -_min - Math.random() * (_max - _min);
-            GoldenerHerbst_Classes.crc2.save();
-            GoldenerHerbst_Classes.crc2.translate(x, y + (position + 50));
-            GoldenerHerbst_Classes.crc2.beginPath();
-            GoldenerHerbst_Classes.crc2.ellipse(-5, 10, 5, 20, 10, 16, 40);
-            GoldenerHerbst_Classes.crc2.closePath();
-            GoldenerHerbst_Classes.crc2.fillStyle = "#a43e00";
-            GoldenerHerbst_Classes.crc2.fill();
-            x += stepMin + Math.random() * (stepMax - stepMin);
-            GoldenerHerbst_Classes.crc2.restore();
-        } while (x < GoldenerHerbst_Classes.crc2.canvas.width);
-    }
-    function drawLeafRed() {
-        let stepMin = 20;
-        let stepMax = 50;
-        let x = 0;
-        let position = GoldenerHerbst_Classes.crc2.canvas.height * GoldenerHerbst_Classes.backgroundPosition;
-        do {
-            let y = -_min - Math.random() * (_max - _min);
-            GoldenerHerbst_Classes.crc2.save();
-            GoldenerHerbst_Classes.crc2.translate(x, y + (position + 50));
-            GoldenerHerbst_Classes.crc2.beginPath();
-            GoldenerHerbst_Classes.crc2.ellipse(0, 0, 11, 20, 10, 16, 40);
-            GoldenerHerbst_Classes.crc2.closePath();
-            GoldenerHerbst_Classes.crc2.fillStyle = "#d30000";
-            GoldenerHerbst_Classes.crc2.fill();
-            x += stepMin + Math.random() * (stepMax - stepMin);
-            GoldenerHerbst_Classes.crc2.restore();
-        } while (x < GoldenerHerbst_Classes.crc2.canvas.width);
-    }
 })(GoldenerHerbst_Classes || (GoldenerHerbst_Classes = {}));
 //# sourceMappingURL=Leafs.js.map

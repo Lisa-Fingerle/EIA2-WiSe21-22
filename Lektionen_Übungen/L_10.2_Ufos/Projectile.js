@@ -1,0 +1,27 @@
+"use strict";
+var L10_AsteroidsInheritance;
+(function (L10_AsteroidsInheritance) {
+    class Projectile extends L10_AsteroidsInheritance.Moveable {
+        lifetime = 2;
+        constructor(_position, _velocity) {
+            super(_position);
+            console.log("Projectile constructor");
+            this.velocity = _velocity.copy(); //vorsichtshalber ist die Geschwindigkeit eine Kopie
+        }
+        draw() {
+            // console.log("Projectile draw");
+            L10_AsteroidsInheritance.crc2.save();
+            L10_AsteroidsInheritance.crc2.translate(this.position.x, this.position.y);
+            L10_AsteroidsInheritance.crc2.strokeRect(-2, -2, 2, 2);
+            L10_AsteroidsInheritance.crc2.restore();
+        }
+        move(_timeslice) {
+            super.move(_timeslice);
+            this.lifetime -= _timeslice;
+            if (this.lifetime < 0)
+                this.expendable = true;
+        }
+    }
+    L10_AsteroidsInheritance.Projectile = Projectile;
+})(L10_AsteroidsInheritance || (L10_AsteroidsInheritance = {}));
+//# sourceMappingURL=Projectile.js.map
