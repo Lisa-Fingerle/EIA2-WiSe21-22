@@ -1,3 +1,0 @@
-namespace GoldenerHerbst_Classes {
-    
-}

@@ -384,6 +384,7 @@ namespace GoldenerHerbst {
         let position: number = crc2.canvas.height * backgroundPosition;
 
         do {
+            
             let y: number = -_min - Math.random() * (_max - _min);
             crc2.save();
             crc2.translate(x, y + (position + 50));
