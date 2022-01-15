@@ -18,6 +18,8 @@ namespace GoldenerHerbst_Polymorphie {
         draw(): void {
             //
         }
+
+        
     
         update(): void {
             //
